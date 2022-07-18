@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { Bilgiler } from './models/IUser'
 import { userLogin } from './Service'
-import { decrypt, encrypt } from './Util'
+import { encrypt } from './Util'
 
 function Login() {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [remember, setRemember] = useState(false)  
+  const [remember, setRemember] = useState(false)
+  const navigate = useNavigate()
 
   const sendForm = ( evt: React.FormEvent ) => {
     evt.preventDefault();
@@ -21,6 +22,7 @@ function Login() {
         if ( durum ) {
             const stBilgiler = JSON.stringify( user.bilgiler )
             sessionStorage.setItem("user", encrypt(stBilgiler) )
+            navigate('/dashboard')
         } else {
             toast.error(mesaj)
         }
@@ -30,20 +32,6 @@ function Login() {
     })
   } 
 
-
-  useEffect(() => {
-    const stSession = sessionStorage.getItem("user")
-     if ( stSession ) {
-        try {
-            const stPlain = decrypt( stSession )
-            const user:Bilgiler = JSON.parse( stPlain )
-            console.log( user )
-        } catch (error) {
-            sessionStorage.removeItem("user")
-        }
-     }
-  }, [])
-  
 
   return (
     <>
