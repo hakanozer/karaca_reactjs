@@ -13,6 +13,7 @@ function Header( item: { bilgiler:Bilgiler } ) {
 
 
   return (
+    <>
     <nav className="navbar navbar-expand-lg bg-light">
     <div className="container-fluid">
         <a className="navbar-brand" href="#">Navbar</a>
@@ -35,7 +36,7 @@ function Header( item: { bilgiler:Bilgiler } ) {
                 <li><a className="dropdown-item" href="#">Action</a></li>
                 <li><a className="dropdown-item" href="#">Another action</a></li>
                 <li><hr className="dropdown-divider" /></li>
-                <li><a onClick={ fncLogOut } className="dropdown-item" role='button' >LogOut</a></li>
+                <li><a data-bs-toggle="modal" data-bs-target="#exampleModal" className="dropdown-item" role='button' >LogOut</a></li>
             </ul>
             </li>
             <li className="nav-item">
@@ -49,6 +50,25 @@ function Header( item: { bilgiler:Bilgiler } ) {
         </div>
     </div>
     </nav>
+    
+    <div className="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div className="modal-dialog">
+        <div className="modal-content">
+        <div className="modal-header">
+            <h5 className="modal-title" id="exampleModalLabel">Admin Logout</h5>
+            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div className="modal-body">
+            Are you sure?
+        </div>
+        <div className="modal-footer">
+            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" onClick={ fncLogOut }  className="btn btn-danger"   data-bs-dismiss="modal" >Logout</button>
+        </div>
+        </div>
+    </div>
+    </div>
+    </>
   )
 }
 
