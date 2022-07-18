@@ -7,6 +7,12 @@ import { decrypt } from './Util'
 function Security( item : { component: JSX.Element } ) {
 
   const control = () : Bilgiler | null => {
+
+    const stLocal = localStorage.getItem('user')
+    if ( stLocal ) {
+        sessionStorage.setItem('user', stLocal)
+    }
+
     const stSession = sessionStorage.getItem("user")
     if ( stSession ) {
        try {
@@ -25,7 +31,7 @@ function Security( item : { component: JSX.Element } ) {
   return (
         user
         ?
-        <><Header />{item.component}</>
+        <><Header bilgiler={user} />{item.component}</>
         :
         <Navigate to='/' />
   )

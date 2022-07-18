@@ -22,6 +22,12 @@ function Login() {
         if ( durum ) {
             const stBilgiler = JSON.stringify( user.bilgiler )
             sessionStorage.setItem("user", encrypt(stBilgiler) )
+
+            // remember me control
+            if ( remember === true ) {
+                localStorage.setItem("user", encrypt(stBilgiler) )
+            }
+
             navigate('/dashboard')
         } else {
             toast.error(mesaj)

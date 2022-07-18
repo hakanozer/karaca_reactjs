@@ -1,7 +1,17 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { Bilgiler } from '../models/IUser'
 
-function Header() {
+function Header( item: { bilgiler:Bilgiler } ) {
+
+  const navigate = useNavigate()
+  const fncLogOut = () => {
+    sessionStorage.removeItem('user')
+    localStorage.removeItem('user')
+    navigate('/')
+  }
+
+
   return (
     <nav className="navbar navbar-expand-lg bg-light">
     <div className="container-fluid">
@@ -25,11 +35,11 @@ function Header() {
                 <li><a className="dropdown-item" href="#">Action</a></li>
                 <li><a className="dropdown-item" href="#">Another action</a></li>
                 <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="#">Something else here</a></li>
+                <li><a onClick={ fncLogOut } className="dropdown-item" role='button' >LogOut</a></li>
             </ul>
             </li>
             <li className="nav-item">
-            <a className="nav-link disabled">Disabled</a>
+            <a className="nav-link disabled"> { item.bilgiler.userName } { item.bilgiler.userSurname } </a>
             </li>
         </ul>
         <form className="d-flex" role="search">
