@@ -1,6 +1,7 @@
 import axios from "axios"
 import { IProduct } from "./models/IProduct"
 import { IUser } from "./models/IUser"
+import { IUserUpdate } from "./models/IUserUpdate"
 
 const baseURL = 'https://www.jsonbulut.com/json/'
 const ref = 'd1becef32825e5c8b0fc1b096230400b'
@@ -32,3 +33,24 @@ export const allProduct = () => {
     const url = 'product.php'
     return config.get<IProduct>(url, { params: sendParams } )
 }
+
+
+export const profileUpdate = ( 
+    name:string, 
+    surname: string, 
+    email: string, 
+    phone: string, 
+    password: string, 
+    userid: string ) => {
+
+    const url = "userSettings.php"
+    const sendParams = {
+        userName: name,
+        userSurname: surname,
+        userMail: email,
+        userPhone: phone,
+        userPass: password,
+        userId: userid
+    }
+    return config.get<IUserUpdate>(url, { params: sendParams });
+} 
