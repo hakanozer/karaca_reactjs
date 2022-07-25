@@ -1,4 +1,5 @@
 import axios from "axios"
+import { IOrders } from "./models/IOrders"
 import { IProduct } from "./models/IProduct"
 import { IUser } from "./models/IUser"
 import { IUserUpdate } from "./models/IUserUpdate"
@@ -54,3 +55,24 @@ export const profileUpdate = (
     }
     return config.get<IUserUpdate>(url, { params: sendParams });
 } 
+
+
+// all Orders
+export const allOrders = ( musterilerID: string ) => {
+    const sendParams = {
+        musterilerID: musterilerID
+    }
+    const url = 'orderList.php'
+    return config.get<IOrders>(url, { params: sendParams } )
+}
+
+// add basket
+export const addBasketOrder = ( customerId: string, productId: string ) => {
+    const sendParams = {
+        customerId: customerId,
+        productId: productId,
+        html: productId
+    }
+    const url = 'orderForm.php'
+    return config.get(url, { params: sendParams } )
+}

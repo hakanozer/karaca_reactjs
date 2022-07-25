@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { OrderList } from '../models/IOrders'
 import { Bilgiler } from '../models/IUser'
+import { allOrders } from '../Service'
 
 function Header( item: { bilgiler:Bilgiler } ) {
 
@@ -10,6 +12,14 @@ function Header( item: { bilgiler:Bilgiler } ) {
     localStorage.removeItem('user')
     navigate('/')
   }
+
+  const [orders, setOrders] = useState<OrderList[]>([])
+  useEffect(() => {
+    allOrders(item.bilgiler.userId).then( res => {
+        setOrders( res.data.orderList[0] )
+    })
+  }, [])
+  
 
 
   return (
@@ -40,7 +50,10 @@ function Header( item: { bilgiler:Bilgiler } ) {
             </ul>
             </li>
             <li className="nav-item">
-            <a className="nav-link disabled"> { item.bilgiler.userName } { item.bilgiler.userSurname } </a>
+            <a className="nav-link "> { item.bilgiler.userName } { item.bilgiler.userSurname } </a>
+            </li>
+            <li className="nav-item">
+            <a className="nav-link "> Basket( { orders.length } ) </a>
             </li>
         </ul>
         <form className="d-flex" role="search">
