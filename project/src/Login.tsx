@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { userLogin } from './Service'
@@ -41,6 +42,10 @@ function Login() {
 
   return (
     <>
+        <Helmet>
+            <title>Admin Login</title>
+            <meta name="description" content="Login App" />
+        </Helmet>
        <div className='row'>
             <div className='col-sm-4'></div>
             <div className='col-sm-4'>

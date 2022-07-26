@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { useDispatch, useSelector } from 'react-redux'
 import { ENote } from './useRedux/ENote'
 import { INote } from './useRedux/INote'
@@ -43,6 +44,11 @@ function Note() {
 
   return (
     <>
+    <Helmet>
+      <title>Note Page</title>
+      <meta name="description" content="Note App" />
+    </Helmet>
+
         <div className='row'>
             <div className='col-sm-6'>
                 <h3>Note Add</h3>

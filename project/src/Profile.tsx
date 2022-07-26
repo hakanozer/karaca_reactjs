@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { StateType } from "./useRedux/Store";
+import { Helmet } from "react-helmet";
 
 function Profile() {
   
@@ -64,6 +65,10 @@ function Profile() {
 
   return (
     <>
+        <Helmet>
+      <title>Profile Page</title>
+      <meta name="description" content="Profile App" />
+    </Helmet>
       { user &&
         <>
         <div className='row'>

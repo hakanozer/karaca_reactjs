@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { useLocation, useParams } from 'react-router-dom'
 import { ProBilgiler } from './models/IProduct'
 
@@ -22,6 +23,10 @@ function Detail() {
     <>
     { item && 
     <> 
+    <Helmet>
+      <title> { item.productName } </title>
+      <meta name="description" content={ item.brief } />
+    </Helmet>
         <h3>{ item?.productName } - { id }</h3>
             <div className='row'>
                 <div className='col-sm-6'>

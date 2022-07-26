@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { toast } from 'react-toastify'
 import ProductItem from './components/ProductItem'
 import { ProBilgiler } from './models/IProduct'
@@ -43,6 +44,10 @@ useEffect(() => {
 
   return (
     <>
+    <Helmet>
+      <title>Product List</title>
+      <meta name="description" content="Product App" />
+    </Helmet>
       <div className='mb-3 mt-3'>
         <input onChange={(evt) => setSearch(evt.target.value)} ref={searchRef} className='form-control' type='search' placeholder='Search..'></input>
       </div>
