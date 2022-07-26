@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { OrderList } from '../models/IOrders'
 import { Bilgiler } from '../models/IUser'
 import { allOrders } from '../Service'
+import { StateType } from '../useRedux/Store'
 
 function Header( item: { bilgiler:Bilgiler } ) {
 
@@ -20,13 +22,13 @@ function Header( item: { bilgiler:Bilgiler } ) {
     })
   }, [])
   
+  const noteArr = useSelector( ( item: StateType ) => item.noteReducer )
 
 
   return (
     <>
     <nav className="navbar navbar-expand-lg bg-light">
     <div className="container-fluid">
-        <a className="navbar-brand" href="#">Navbar</a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
         </button>
@@ -37,6 +39,9 @@ function Header( item: { bilgiler:Bilgiler } ) {
             </li>
             <li className="nav-item">
             <NavLink to='/profile' className='nav-link'>Profile</NavLink>
+            </li>
+            <li className="nav-item">
+            <NavLink to='/note' className='nav-link'>Note</NavLink>
             </li>
             <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -54,6 +59,9 @@ function Header( item: { bilgiler:Bilgiler } ) {
             </li>
             <li className="nav-item">
             <a className="nav-link "> Basket( { orders.length } ) </a>
+            </li>
+            <li className="nav-item">
+            <a className="nav-link ">Not({ noteArr.length })</a>
             </li>
         </ul>
         <form className="d-flex" role="search">

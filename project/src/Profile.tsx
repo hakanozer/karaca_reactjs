@@ -6,8 +6,12 @@ import { control } from './Util'
 import { profileUpdate } from "./Service";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { StateType } from "./useRedux/Store";
 
 function Profile() {
+  
+  const noteArr = useSelector( ( item: StateType ) => item.noteReducer )
 
   const navigate = useNavigate()
   const user = control()
@@ -67,6 +71,9 @@ function Profile() {
           <div className='col-sm-4'>
             <div className='mb-3 mt-3 text-center'>
               <img src={'https://www.gravatar.com/avatar/'+md5Url+'?s=150'} className="img-thumbnail" />
+            </div>
+            <div className="mb-3 text-center">
+              Total Note: { noteArr.length }
             </div>
 
             <form onSubmit={handleSubmit}>
