@@ -65,7 +65,7 @@ function Profile() {
 
   return (
     <>
-        <Helmet>
+    <Helmet>
       <title>Profile Page</title>
       <meta name="description" content="Profile App" />
     </Helmet>
