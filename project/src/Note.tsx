@@ -19,6 +19,7 @@ function Note() {
 
   const sendForm = (evt: React.FormEvent) => {
     evt.preventDefault()
+    console.log( "sendForm Call" )
     const item:INote = {
         nid: 0,
         title: title,

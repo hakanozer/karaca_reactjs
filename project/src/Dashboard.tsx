@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import ProductItem from './components/ProductItem'
 import { ProBilgiler } from './models/IProduct'
 import { allProduct } from './Service'
+import { allFnc } from './UsePromise'
 
 function Dashboard() {
 
@@ -35,6 +36,7 @@ function Dashboard() {
 
 useEffect(() => {
   
+  allFnc()
   const newArr = oldArr.filter( item => item.productName.toLocaleLowerCase().includes(search.toLocaleLowerCase()) || item.brief.toLocaleLowerCase().includes( search.toLocaleLowerCase() ) )
   setArr(newArr)
 

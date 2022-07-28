@@ -1,8 +1,9 @@
 import { combineReducers, createStore } from "redux";
 import { noteReducer } from "./NoteReducer";
+import { orderReducer } from './OrderReducer'
 
 const combine = combineReducers({
-    noteReducer
+    noteReducer, orderReducer
 })
 
 

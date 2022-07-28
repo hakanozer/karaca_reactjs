@@ -1,10 +1,15 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { ProBilgiler } from '../models/IProduct'
-import { addBasketOrder } from '../Service'
+import { addBasketOrder, allOrders } from '../Service'
+import { EOrder } from '../useRedux/EOrder'
+import { OrderAction } from '../useRedux/OrderReducer'
 import { control } from '../Util'
 
 function ProductItem( item: { pro: ProBilgiler } ) {
+
+  const dispatchOrder = useDispatch()
 
   const navigate = useNavigate()
   const gotoDetail = () => {
@@ -14,8 +19,19 @@ function ProductItem( item: { pro: ProBilgiler } ) {
   const addBasket = () => {
     const bilgi = control()
     addBasketOrder(bilgi!.userId, item.pro.productId).then( res => {
-      window.location.reload()
-    } )
+      //window.location.reload()
+      allOrders(bilgi!.userId).then( resOrder => {
+        const orderArr = resOrder.data.orderList[0]
+        console.log( orderArr )
+        const orderAction:OrderAction = {
+          type: EOrder.ORDER_LIST,
+          payload: orderArr
+        }
+        dispatchOrder(orderAction)
+      })
+    } ).catch( error => {
+      console.error( "addBasket" +  error.message ) 
+    })
   }
 
   return (

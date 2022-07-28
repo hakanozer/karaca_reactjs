@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { OrderList } from '../models/IOrders'
 import { Bilgiler } from '../models/IUser'
 import { allOrders } from '../Service'
+import { EOrder } from '../useRedux/EOrder'
+import { OrderAction } from '../useRedux/OrderReducer'
 import { StateType } from '../useRedux/Store'
 
 function Header( item: { bilgiler:Bilgiler } ) {
@@ -15,19 +17,26 @@ function Header( item: { bilgiler:Bilgiler } ) {
     navigate('/')
   }
 
-  const [orders, setOrders] = useState<OrderList[]>([])
+  const orderDispatch = useDispatch()
+  const orderArr = useSelector( ( item: StateType ) => item.orderReducer )
+  //const [orders, setOrders] = useState<OrderList[]>([])
   useEffect(() => {
     allOrders(item.bilgiler.userId).then( res => {
-        setOrders( res.data.orderList[0] )
+        //setOrders( res.data.orderList[0] )
+        const orderAction:OrderAction = {
+            type: EOrder.ORDER_LIST,
+            payload: res.data.orderList[0]
+        }
+        orderDispatch(orderAction)
     })
   }, [])
   
-  const noteArr = useSelector( ( item: StateType ) => item.noteReducer )
+  //const noteArr = useSelector( ( item: StateType ) => item.noteReducer )
 
 
   return (
     <>
-    <nav className="navbar navbar-expand-lg bg-light">
+    <nav className="navbar fixed-top navbar-expand-lg bg-light">
     <div className="container-fluid">
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
@@ -58,10 +67,10 @@ function Header( item: { bilgiler:Bilgiler } ) {
             <a className="nav-link "> { item.bilgiler.userName } { item.bilgiler.userSurname } </a>
             </li>
             <li className="nav-item">
-            <a className="nav-link "> Basket( { orders.length } ) </a>
+            <a className="nav-link "> Basket( { orderArr.length } ) </a>
             </li>
             <li className="nav-item">
-            <a className="nav-link ">Not({ noteArr.length })</a>
+            <a className="nav-link ">Not(0)</a>
             </li>
         </ul>
         <form className="d-flex" role="search">

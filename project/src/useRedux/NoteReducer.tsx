@@ -16,6 +16,7 @@ export const noteReducer = ( state: INote[] = dummyData(), action: NoteAction ) 
             }
             const nowNote = action.payload
             nowNote.nid = endNid
+            console.log( "endNid", endNid )
             return [ ...state, nowNote ]
         case ENote.NOTE_DELETE:
             const index = state.findIndex( item => item.nid === action.payload.nid )
