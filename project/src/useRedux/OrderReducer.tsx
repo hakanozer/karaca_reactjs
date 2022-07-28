@@ -10,6 +10,7 @@ export interface OrderAction {
 export const orderReducer = ( state: OrderList[] = [], action: OrderAction ) => {
     switch (action.type) {
         case EOrder.ORDER_LIST:
+            console.log("orderReducer ORDER_LIST ")
         return action.payload;
     
         default:

@@ -6,7 +6,6 @@ const combine = combineReducers({
     noteReducer, orderReducer
 })
 
-
 export type StateType = ReturnType<typeof combine >
 
 export const store = createStore(combine)

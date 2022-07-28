@@ -60,7 +60,8 @@ export const profileUpdate = (
 // all Orders
 export const allOrders = ( musterilerID: string ) => {
     const sendParams = {
-        musterilerID: musterilerID
+        musterilerID: musterilerID,
+        ufuk: Math.random()
     }
     const url = 'orderList.php'
     return config.get<IOrders>(url, { params: sendParams } )

@@ -17,7 +17,8 @@ function Header( item: { bilgiler:Bilgiler } ) {
     navigate('/')
   }
 
-  const orderDispatch = useDispatch()
+  const dispatch = useDispatch()
+  const noteArr = useSelector( ( item: StateType ) => item.noteReducer )
   const orderArr = useSelector( ( item: StateType ) => item.orderReducer )
   //const [orders, setOrders] = useState<OrderList[]>([])
   useEffect(() => {
@@ -27,12 +28,10 @@ function Header( item: { bilgiler:Bilgiler } ) {
             type: EOrder.ORDER_LIST,
             payload: res.data.orderList[0]
         }
-        orderDispatch(orderAction)
+        dispatch(orderAction)
     })
   }, [])
   
-  //const noteArr = useSelector( ( item: StateType ) => item.noteReducer )
-
 
   return (
     <>
@@ -70,7 +69,7 @@ function Header( item: { bilgiler:Bilgiler } ) {
             <a className="nav-link "> Basket( { orderArr.length } ) </a>
             </li>
             <li className="nav-item">
-            <a className="nav-link ">Not(0)</a>
+            <a className="nav-link ">Not( { noteArr.length } )</a>
             </li>
         </ul>
         <form className="d-flex" role="search">

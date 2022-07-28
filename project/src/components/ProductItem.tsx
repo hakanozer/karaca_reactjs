@@ -19,16 +19,19 @@ function ProductItem( item: { pro: ProBilgiler } ) {
   const addBasket = () => {
     const bilgi = control()
     addBasketOrder(bilgi!.userId, item.pro.productId).then( res => {
-      //window.location.reload()
-      allOrders(bilgi!.userId).then( resOrder => {
-        const orderArr = resOrder.data.orderList[0]
-        console.log( orderArr )
-        const orderAction:OrderAction = {
-          type: EOrder.ORDER_LIST,
-          payload: orderArr
-        }
-        dispatchOrder(orderAction)
-      })
+      console.log( res )
+      setTimeout(() => {
+          //window.location.reload()
+          allOrders(bilgi!.userId).then( resOrder => {
+            const orderArr = resOrder.data.orderList[0]
+            console.log( orderArr )
+            const orderAction:OrderAction = {
+              type: EOrder.ORDER_LIST,
+              payload: orderArr
+            }
+            dispatchOrder(orderAction)
+          })
+      }, 3000);
     } ).catch( error => {
       console.error( "addBasket" +  error.message ) 
     })
