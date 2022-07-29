@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState, useMemo } from 'react'
 import { Helmet } from 'react-helmet'
 import { toast } from 'react-toastify'
 import ProductItem from './components/ProductItem'
@@ -61,14 +61,19 @@ useEffect(() => {
     name: 'Serkan',
     age: 45
   }
+
+  
+  const [a, setA] = useState(0)
+  const memo = useMemo(() => call(a), [a])
+
   useEffect(() => {
     setItem( newItem )
+    setA( 10 )
   }, [])
-  
 
   return (
     <>
-    
+    { memo }
     <div style={{ height: 50, }}></div>
     <Helmet>
       <title>Product List</title>
@@ -89,6 +94,11 @@ useEffect(() => {
       </div>
     </>
   )
+}
+
+const call = (val:number) => {
+  console.log( "Val", val )
+  return val * val;
 }
 
 export default Dashboard
