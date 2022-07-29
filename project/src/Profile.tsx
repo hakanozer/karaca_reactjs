@@ -65,6 +65,7 @@ function Profile() {
 
   return (
     <>
+    <div style={{ height: 50, }}></div>
     <Helmet>
       <title>Profile Page</title>
       <meta name="description" content="Profile App" />

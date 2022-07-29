@@ -21,6 +21,7 @@ function Detail() {
 
   return (
     <>
+    <div style={{ height: 50, }}></div>
     { item && 
     <> 
     <Helmet>

@@ -20,7 +20,6 @@ function ProductItem( item: { pro: ProBilgiler } ) {
     const bilgi = control()
     addBasketOrder(bilgi!.userId, item.pro.productId).then( res => {
       console.log( res )
-      setTimeout(() => {
           //window.location.reload()
           allOrders(bilgi!.userId).then( resOrder => {
             const orderArr = resOrder.data.orderList[0]
@@ -31,7 +30,6 @@ function ProductItem( item: { pro: ProBilgiler } ) {
             }
             dispatchOrder(orderAction)
           })
-      }, 3000);
     } ).catch( error => {
       console.error( "addBasket" +  error.message ) 
     })

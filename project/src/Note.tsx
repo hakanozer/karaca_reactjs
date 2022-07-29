@@ -45,6 +45,7 @@ function Note() {
 
   return (
     <>
+    <div style={{ height: 50, }}></div>
     <Helmet>
       <title>Note Page</title>
       <meta name="description" content="Note App" />
