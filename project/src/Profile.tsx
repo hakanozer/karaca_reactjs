@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import {Md5} from "md5-typescript";
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { control } from './Util'
 import { profileUpdate } from "./Service";
 import { toast } from "react-toastify";
@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { StateType } from "./useRedux/Store";
 import { Helmet } from "react-helmet";
+import { DataContext } from "./AppContext";
 
 function Profile() {
   
@@ -62,10 +63,13 @@ function Profile() {
     }
   })
   
+    //use Context
+    const { itemVal, setItem } = useContext(DataContext)
 
   return (
     <>
     <div style={{ height: 50, }}></div>
+
     <Helmet>
       <title>Profile Page</title>
       <meta name="description" content="Profile App" />
@@ -80,6 +84,7 @@ function Profile() {
             </div>
             <div className="mb-3 text-center">
               Total Note: { noteArr.length }
+              <p> Context: { itemVal.name } { itemVal.age } </p>
             </div>
 
             <form onSubmit={handleSubmit}>

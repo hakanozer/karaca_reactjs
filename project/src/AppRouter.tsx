@@ -11,20 +11,23 @@ import Detail from './Detail'
 import Profile from './Profile'
 import Security from './Security'
 import Note from './Note'
+import { DataContext, objContext } from './AppContext'
 
 const router =
 <Provider store={store}>
-    <BrowserRouter>
-        <ToastContainer/>
-        <Routes>
-            <Route path='/' element={<Login />} />
-            <Route path='/dashboard' element={ <Security component={<Dashboard/>} /> } />
-            <Route path='/detail/:id' element={ <Security component={<Detail/>} /> } />
-            <Route path='/profile' element={ <Security component={<Profile/>} /> } />
-            <Route path='/note' element={ <Security component={<Note/>} /> } />
-            <Route path='*' element={ <Navigate to='/' /> }></Route>
-        </Routes>
-    </BrowserRouter>
+    <DataContext.Provider value={objContext}>
+        <BrowserRouter>
+            <ToastContainer/>
+            <Routes>
+                <Route path='/' element={<Login />} />
+                <Route path='/dashboard' element={ <Security component={<Dashboard/>} /> } />
+                <Route path='/detail/:id' element={ <Security component={<Detail/>} /> } />
+                <Route path='/profile' element={ <Security component={<Profile/>} /> } />
+                <Route path='/note' element={ <Security component={<Note/>} /> } />
+                <Route path='*' element={ <Navigate to='/' /> }></Route>
+            </Routes>
+        </BrowserRouter>
+    </DataContext.Provider>
 </Provider>
 
 export default router
